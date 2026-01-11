@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>English to Latin AI Translator</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+      padding: 30px;
+    }
+    textarea {
+      width: 100%;
+      height: 80px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px;
+    }
+    .box {
+      background: white;
+      padding: 15px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>English → Latin Translator (Explained)</h1>
+
+<textarea id="english" placeholder="Enter English sentence"></textarea>
+<button onclick="translate()">Translate</button>
+
+<div class="box" id="latin"></div>
+<div class="box" id="explanation"></div>
+
+<script>
+function translate() {
+  let input = document.getElementById("english").value.toLowerCase();
+
+  // Example dictionary (expandable)
+  let dictionary = {
+    "girl": {latin: "puella", info: "noun, 1st declension, nominative singular"},
+    "boy": {latin: "puer", info: "noun, 2nd declension, nominative singular"},
+    "water": {latin: "aquam", info: "noun, accusative because it is the object"},
+    "carries": {latin: "portat", info: "verb, present tense, 3rd person singular"},
+  };
+
+  let words = input.split(" ");
+  let latinSentence = [];
+  let explanations = [];
+
+  words.forEach(word => {
+    if (dictionary[word]) {
+      latinSentence.push(dictionary[word].latin);
+      explanations.push(
+        word + " → " + dictionary[word].latin +
+        " (" + dictionary[word].info + ")"
+      );
+    }
+  });
+
+  document.getElementById("latin").innerHTML =
+    "<b>Latin Translation:</b><br>" + latinSentence.join(" ");
+
+  document.getElementById("explanation").innerHTML =
+    "<b>Explanation:</b><br>" + explanations.join("<br>");
+}
+</script>
+
+</body>
+</html>
